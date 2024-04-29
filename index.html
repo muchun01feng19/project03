@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>多媒体音频</title>
+</head>
+
+<body>
+	<!--<h3> 播放音频 </h3>
+    <audio src="软工学习资料/MGP/英雄联盟.mp4" controls="controls" autoplay="autoplay" loop preload="auto"></audio>
+    <h3> 播放视频 </h3>
+    <video src="软工学习资料/MGP/英雄联盟.mp4" controls="controls" autoplay="autoplay" loop preload="auto" width="600px"></video>
+    -->
+	<div style="width: 400px;margin: 0 auto;border: solid 1px black;">
+		<img src="软工学习资料/MGP/OIP-C (8).jpg" width="400px" alt=""/>
+		<div id="msg"></div>
+		<div>
+			<input type="button" onclick="audioPlay(this);" value=" 播放 " />
+            <input type="button" onclick="audioMuted(this);" value=" 静音 " />
+            <input type="button" onclick="audioVPlus();" value=" 增加音量 " />
+            <input type="button" onclick="audioVSub();" value=" 减少音量 " />
+		</div>
+	</div>
+</body>
+	<script type="text/javascript">
+		var media=new Audio("软工学习资料/MGP/Reynard Silva - The Way I Still Love You.mp3");
+		auMsg=document.getElementById("msg");
+		media.onloadstart=function()
+		{
+			auMsg.innerHTML="开始加载音乐";
+		}
+		media.onprogress=function()
+		{
+			auMsg.innerHTML="准备播放音乐";
+		}
+		media.onplay=function()
+		{
+			auMsg.innerHTML+="当前音量："+Math.floor(media.volume*100)+"%";
+		}
+		media.onended=function()
+		{
+			auMsg.innerHTML="音乐播放器结束";
+		}
+		function audioPlay(btn)
+		{
+			if(media.paused||media.ended)
+				{
+					media.onplay();
+					btn.value="暂停";
+				}
+			else
+				{
+					media.pause();
+					btn.value="播放";
+				}
+		}
+		function audioMuted(btn)
+		{
+			if(media.muted)
+				{
+					btn.value="静音";
+					media.muted=false;
+				}
+			else
+				{
+					btn.value="取消静音";
+					media.muted=true;
+				}
+		}
+		function audioVPlus() 
+		{      // 增加音量
+            if (media.volume <= 0.9)media.volume += 0.1;
+		}
+        function audioVSub() 
+		{      // 减少音量
+            if (media.volume >= 0.1)media.volume -= 0.1;
+		}
+              // 音量变化事件
+        media.onvolumechange = function () 
+		{
+             auMsg.innerHTML = " 当前音量：" + Math.floor(media.volume * 100) + "%";
+		}
+	</script>
+</html>
